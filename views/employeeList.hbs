@@ -12,19 +12,52 @@
 
 <body class="bg-info">
     <div class="row">
-        <div class="col-md-6 offset-md-3" style="background-color: #fff;border-radius:36px;margin-top: 25px;padding:20px;">
+        <div class="col-md-8 offset-md-2" style="background-color: #fff;border-radius:36px;margin-top: 25px;padding:20px;">
         <ul>
             <li><a href="/"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp;Home</a></li>
             <li><a href="/department"><i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp;Add Department</a></li>
+            <li><a href="/departmentList"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>&nbsp;View Department</a></li>
             <li><a href="/employee"><i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp;Add Employee</a></li>
         </ul>
-        <br><h3 style="text-align: center;">Employee List</h3>
+        <!--<script>
+            //$('#loginAlert').hide();
+            const urlParams = new URLSearchParams(window.location.search);
+            const myParam = urlParams.get('status');
+            if (myParam == "updated") {
+                alert("Data Updated Successfully..");
+            }else if (myParam == "failed"){ 
+                alert("Data Updation Failed..");
+            }else
+        </script>-->
+        <br><center>
+            <h3 style="text-align: center;font-style: italic;">Employee List</h3>
+            {{#if success }}
+            <div class="alert alert-success text-green" role="alert" style="max-width: 350px;height:auto;font-size:smaller;font-weight:bold;">
+                {{success}}
+            </div>
+            {{/if}}
+            {{#if empDel }}
+            <div class="alert alert-warning text-green" role="alert"
+                style="max-width: 350px;height:auto;font-size:smaller;font-weight:bold;">
+                {{empDel}}
+            </div>
+            {{/if}}
+            {{#if error}}
+            <div class="alert alert-danger text-red" role="alert" style="max-width: 300px;height:auto;font-size:smaller;font-weight:bold;">
+                {{error}}
+            </div>
+            {{/if}}
+        </center>
+
          {{!-- <h3><a class="btn btn-secondary" href="/employee"><i class="fa fa-plus"></i> Create New</a> <a class="btn btn-secondary" href="/employee"><i class="fa fa-plus"></i> Create New</a> Employee List</h3> --}}
-<table class="table table-striped">
-    <thead>
-        <tr style="text-align: center;">
-            <th>Code</th>
+<table class="table table-hover table-sm css-serial">
+    <thead class="thead-dark">
+        <tr style="text-align: center;font-size:small;">
+            <th>Sl.No</th>
+            <th hidden="true">Code</th>
             <th>Name</th>
+            <th>Address</th>
+            <th>Email</th>
             <th>Mobile</th>
             <th>Salary</th>
             <th>Department</th>
@@ -33,11 +66,14 @@
     </thead>
     <tbody>
         {{#each list}}
-        <tr style="text-align: center;">
-            <td>{{this.empCode}}</td>
+        <tr style="text-align: center;font-size: smaller;">
+            <td></td>
+            <td hidden="true">{{this._id}}</td>
             <td>{{this.empName}}</td>
-            <td>{{this.Mobile}}</td>
-            <td>{{this.Salary}}</td>
+            <td>{{this.address}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.mobile}}</td>
+            <td>{{this.salary}}</td>
             <td>{{this.department}}</td>
             <td>
                 <a href="/employee/{{this._id}}" onclick="return confirm('Are you sure to update this record ?');"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
@@ -46,7 +82,14 @@
         </tr>
         {{/each}}
     </tbody>
-</table><br><br>
+</table>
+<nav aria-label="Page navigation example" class="pagination">
+    <ul>
+        {{#paginate current=current pages=pages}}
+        {{/paginate}}
+    </ul>
+</nav>
+<br><br>
 <center>
     <div class="form-group">
         <span style="font-size: medium;font-weight:bold;color:chocolate;">Developed By: Indranil Chatterjee</span>

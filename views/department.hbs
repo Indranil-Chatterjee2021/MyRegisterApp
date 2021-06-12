@@ -15,21 +15,41 @@
         <div class="col-md-6 offset-md-3" style="background-color: #fff;border-radius:36px;margin-top: 25px;padding:20px;">
         <ul>
             <li><a href="/"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp;Home</a></li>
+            <li><a href="/departmentList"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>&nbsp;View Department</a></li>
             <li><a href="/employee"><i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp;Add Employee</a></li>
             <li><a href="/employeeList"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>&nbsp;View Employee</a></li>
         </ul>
-        <br><center><h3>{{viewTitle}}</h3></center> 
+        <br>
+        <center>
+            <h3 style="font-style: italic;">Add Department</h3>
+            {{#if success }}
+            <div class="alert alert-success text-green" role="alert" style="max-width: 350px;height:auto;font-size:small;">
+                {{success}}
+            </div>
+            {{/if}}
+            {{#if error}}
+            <div class="alert alert-danger text-red" role="alert" style="max-width: 400px;height:auto;font-size:small;">
+                {{error}}
+            </div>
+            {{/if}}
+        </center>
+        
+        {{!-- <br><center><h3>{{viewTitle}}</h3></center>  --}}
 
 <form action="/department" method="POST" autocomplete="off" id="add_dept">
     <div class="form-group">
         <label>Department Code</label>
-        <input type="text" class="form-control" name="deptCode" placeholder="Department Code" value="">
-        <div class="text-danger">
-            </div>
+        <input type="text" class="form-control" name="deptCode" placeholder="Department Code" value="{{Data.deptCode}}">
+        {{#if errors.deptCode }}
+        <p>*{{ errors.deptCode.msg }}</p>
+        {{/if}}
     </div>
     <div class="form-group">
         <label>Department Name</label>
-        <input type="text" class="form-control" name="deptname" placeholder="Department Name" value="">
+        <input type="text" class="form-control" name="deptname" placeholder="Department Name" value="{{Data.deptname}}">
+        {{#if errors.deptname }}
+        <p>*{{ errors.deptname.msg }}</p>
+        {{/if}}
         <div class="text-danger">
             </div>
     </div>
@@ -48,10 +68,10 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <script>
-    $("#add_dept").submit(function(event){
-    alert("Data Inserted Successfully!");
+    //$("#add_dept").submit(function(event){
+    //alert("Data Inserted Successfully!");
 
-})
+//})
 </script>
 </body>
 

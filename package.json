@@ -14,8 +14,12 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.2.1",
+    "express-session": "^1.17.2",
+    "express-validator": "^6.11.1",
     "hbs": "^4.1.1",
     "mongoose": "^5.11.18",
-    "nodemon": "^2.0.7"
+    "mongoose-sequence": "^5.3.1",
+    "nodemon": "^2.0.7",
+    "req-flash": "0.0.3"
   }
 }

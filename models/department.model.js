@@ -2,10 +2,20 @@
 const mongoose = require("mongoose");
 // Department Schema
 const department = new mongoose.Schema({
-  deptCode: {
-    type: String,
+  _id: {
+    type: mongoose.Schema.Types.String,
+    required: true,
   },
   deptName: {
+    type: String,
+    required: true,
+    unique: true,
+    //dropDups: true,
+  },
+  createdAt: {
+    type: String,
+  },
+  lastModified: {
     type: String,
   },
 });

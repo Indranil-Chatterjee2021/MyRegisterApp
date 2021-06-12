@@ -30,7 +30,9 @@ const DbConn = async () => {
       useUnifiedTopology: true,
       useFindAndModify: false,
       useCreateIndex: true,
+      //replicaSet: "rs",
     });
+    mongoose.Promise = global.Promise;
     console.log(`MongoDB Connected to : ${conn.connection.host}`);
   } catch (error) {
     console.log(error);
