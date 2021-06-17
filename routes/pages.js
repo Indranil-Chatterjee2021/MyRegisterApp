@@ -1,16 +1,35 @@
 const express = require("express");
 const router = express.Router();
+const { upload } = require("../fileUploader/uploader");
+const { validateUser } = require("../controllers/userValidator");
 const { validateDept } = require("../controllers/deptValidator");
 const { validateEmp } = require("../controllers/empValidator");
+const login_reg_cntrl = require("../controllers/login_regController");
 const DeptCntrlr = require("../controllers/DeptController");
 const EmpCntrlr = require("../controllers/EmpController");
 
-//Home Page Route....
-router.get("/", (req, res) => {
+//Login/Home Page Route....
+router.get("/home", (req, res) => {
   res.render("home", {
     viewTitle: "A NodeJs ExpressJs MongoDB CRUD Web Application",
   });
 });
+
+router.get("/", login_reg_cntrl.getLogin);
+router.post("/login", login_reg_cntrl.logIn);
+router.get("/logout", login_reg_cntrl.logOut);
+
+//Registration Route...
+router.get("/register", login_reg_cntrl.getRegister);
+router.post("/", login_reg_cntrl.creates);
+
+router.get("/userList", login_reg_cntrl.userList);
+
+// Change/Forget Pwd Route...
+router.get("/forgetpass", (req, res) => {
+  res.render("forget");
+});
+router.post("/forgetpass", login_reg_cntrl.forgetPwd);
 
 // Department Routings....
 router.get("/department", DeptCntrlr.loadDept);

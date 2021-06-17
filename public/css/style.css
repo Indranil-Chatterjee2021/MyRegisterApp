@@ -24,7 +24,7 @@ li a {
   display: block;
   color: white;
   text-align: center;
-  font-size: small;
+  font-size: 12px;
   font-family: Tahoma;
   padding: 12px 6px;
   text-decoration: none;
@@ -54,4 +54,18 @@ tr:nth-child(odd) {
 }
 tr:nth-child(even) {
   background-color: peachpuff;
+}
+.mssg {
+  margin-top: 7px;
+  margin-bottom: 7px;
+  border-radius: 5px;
+}
+.footer {
+  font-size: small;
+  font-weight: bold;
+  color: chocolate;
+}
+.regForm input {
+  margin-bottom: 4px;
+  text-align: center;
 }

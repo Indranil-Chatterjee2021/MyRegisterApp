@@ -32,15 +32,6 @@ exports.deptList = (req, res) => {
         //console.log(docs);
       });
     });
-  // Department.find((err, docs) => {
-  //   if (!err) {
-  //     res.render("departmentList", {
-  //       success: req.flash("deptUpdated"),
-  //       error: req.flash("deptFailed"),
-  //       list: docs,
-  //     });
-  //   }
-  // });
 };
 
 exports.create = async (req, res) => {
