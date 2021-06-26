@@ -6,7 +6,7 @@ const dotenv = require("dotenv");
 const path = require("path");
 const MongoDB = require("./models/db");
 const { paginate } = require("./hbsHelper");
-
+const hbss = require("hbs");
 dotenv.config({ path: ".env" });
 const PORT = process.env.PORT;
 MongoDB();
@@ -35,8 +35,7 @@ app.use(flash());
 app.engine("hbs", hbs.engine);
 
 app.set("view engine", "hbs");
-
-app.use("/uploads", express.static("./uploads"));
+hbss.registerPartials(__dirname + "/views/partials");
 app.use(express.static(path.join(__dirname, "./public")));
 
 app.use("/", require("./routes/pages"));

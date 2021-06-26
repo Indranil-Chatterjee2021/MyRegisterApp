@@ -1,3 +1,4 @@
+{{!--
 <!DOCTYPE html>
 
 <html>
@@ -5,76 +6,63 @@
 <head>
     <title>NodeMongoCRUD</title>
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
-        <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<body class="bg-info">
-    <div class="row">
-        <div class="col-md-6 offset-md-3" style="background-color: #fff;border-radius:36px;margin-top: 25px;padding:20px;">
-        <ul>
-            <li><a href="/home"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp;Home</a></li>
-            <li><a href="/departmentList"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>&nbsp;View Department</a></li>
-            <li><a href="/employee"><i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp;Add Employee</a></li>
-            <li><a href="/employeeList"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>&nbsp;View Employee</a></li>
-            <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Logout</a></li>
-        </ul>
+<body class="bg-info"> --}}
+    {{> header}}
+    <div class="content">
+
         <br>
         <center>
             <h3 style="font-style: italic;">Add Department</h3>
             {{#if success }}
-            <div class="alert alert-success text-green" role="alert" style="max-width: 350px;height:auto;font-size:small;">
+            <div class="alert alert-success text-green" role="alert"
+                style="max-width: 350px;height:auto;font-size:small;font-weight:bold;">
                 {{success}}
             </div>
             {{/if}}
             {{#if error}}
-            <div class="alert alert-danger text-red" role="alert" style="max-width: 400px;height:auto;font-size:small;">
+            <div class="alert alert-danger text-red" role="alert" style="max-width: 400px;height:auto;font-size:small;font-weight:bold;">
                 {{error}}
             </div>
             {{/if}}
         </center>
-        
-        {{!-- <br><center><h3>{{viewTitle}}</h3></center>  --}}
-
-<form action="/department" method="POST" autocomplete="off" id="add_dept">
-    <div class="form-group">
-        <label>Department Code</label>
-        <input type="text" class="form-control" name="deptCode" placeholder="Department Code" value="{{Data.deptCode}}">
-        {{#if errors.deptCode }}
-        <p>*{{ errors.deptCode.msg }}</p>
-        {{/if}}
+        <center>
+            <form action="/department" method="POST" autocomplete="off" id="add_dept">
+                <br>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="deptCode" placeholder="Enter Department Code"
+                        value="{{Data.deptCode}}">
+                    {{#if errors.deptCode }}
+                    <p>*{{ errors.deptCode.msg }}</p>
+                    {{/if}}
+                </div>
+                <br>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="deptname" placeholder="Enter Department Name"
+                        value="{{Data.deptname}}">
+                    {{#if errors.deptname }}
+                    <p>*{{ errors.deptname.msg }}</p>
+                    {{/if}}
+                    <div class="text-danger">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <center><button type="submit" class="btn btn-info"><i
+                                class="fa fa-database"></i>&nbsp;Submit</button></center>
+                    {{!-- <a class="btn btn-secondary" href="/employee/list"><i class="fa fa-list-alt"></i> View All</a>
+                    --}}
+                    {{!-- <a class="btn btn-secondary" href="/employee"><i class="fa fa-list-alt"></i> Add Employee</a>
+                    --}}
+                </div>
+            </form>
+        </center>
+        <!-- include footer -->
+        {{> footer}}
+        <!-- /include footer -->
     </div>
-    <div class="form-group">
-        <label>Department Name</label>
-        <input type="text" class="form-control" name="deptname" placeholder="Department Name" value="{{Data.deptname}}">
-        {{#if errors.deptname }}
-        <p>*{{ errors.deptname.msg }}</p>
-        {{/if}}
-        <div class="text-danger">
-            </div>
-    </div>
-    <div class="form-group">
-        <center><button type="submit" class="btn btn-info"><i class="fa fa-database"></i>&nbsp;Submit</button></center>
-        {{!-- <a class="btn btn-secondary" href="/employee/list"><i class="fa fa-list-alt"></i> View All</a> --}}
-        {{!-- <a class="btn btn-secondary" href="/employee"><i class="fa fa-list-alt"></i> Add Employee</a> --}}
-    </div>
-</form><br><center>
-<div class="form-group">
-    <span class="footer">Developed By: Indranil Chatterjee</span>
-</div>
-
-</center>
-        </div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-<script>
-    //$("#add_dept").submit(function(event){
-    //alert("Data Inserted Successfully!");
-
-//})
-</script>
-</body>
-
-</html>

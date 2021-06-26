@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {{!-- <meta name="viewport" content="width=device-width, initial-scale=1"> --}}
+    <title>NodeMongoCRUD</title>
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style1.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="/JS/myScripts.js"></script>
+</head>
+<body>
+    
+    <!-- Header -->
+        
+                    <div class="container">
+                        <nav>
+                            <ul>
+                                <li onclick="window.location.href='/home';"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Home</li>
+                                <li><i class="fa fa-bars" aria-hidden="true"></i>&nbsp;Department
+                                    <ul class="sub-nav">
+                                        <li onclick="window.location.href='/department';"><i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp;Add New</a></li>
+                                        <li onclick="window.location.href='/departmentList';"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>&nbsp;View List</a></li>
+                                    </ul>
+                                </li>
+                                <li><i class="fa fa-bars" aria-hidden="true"></i>&nbsp;Employee
+                                    <ul class="sub-nav">
+                                        <li onclick="window.location.href='/employee';"><i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp;Add New</a></li>
+                                        <li onclick="window.location.href='/employeeList';"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>&nbsp;View List</a></li>
+                                        </ul>
+                                </li>
+                                <li onclick="window.location.href='/logout';"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Logout</li>
+                                
+                            </ul>
+                        </nav>
+                    
+                        
+                    </div>
+<div class="text-center">
+    <span style="font-weight: bold;color:white;font-size:larger">A Simple NodeJs ExpressJs MongoDB CRUD Web Application</span><br>
+    <span style="font-weight: bold;color:#FF3131;font-size:large">Developed By : Indranil Chatterjee</span><br>
+</div>
+                
+    <!-- /Header -->

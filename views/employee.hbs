@@ -1,147 +1,84 @@
-<!DOCTYPE html>
-
-<html>
-
-<head>
-    <title>NodeMongoCRUD</title>
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
-        <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script>
-  function submitForm()
-  {
-      if(viewtitle !== "Add Employee"){
-           alert("Data Updated Successfully!");
-      }
-  }  
-  function myFunction() 
-  {
-    var viewtitle = document.getElementById("title").innerHTML;
-    if (viewtitle !== "Add Employee"){
-       document.getElementById("Dept").innerHTML = "Select Department To Change";
-       document.getElementById("add_emp").id = "update_emp";
-       document.getElementById("update_emp").action="/employee/update";
-       //document.getElementById("submit").innerHTML="Update";
-       document.getElementById("submit").style.display = 'none';
-       document.getElementById("update").style.display='block';
-       document.getElementById("ecode").readOnly=true;
-       }else{
-           document.getElementById("dept").style.display="none";
-           document.getElementById("update").style.display = 'none';
-       }
-  }
-  function selectChanger()
-  {
-      var d=document.getElementById("selector");
-      var deptbox = d.options[d.selectedIndex].text;
-      document.getElementById("deptBox").value = deptbox;
-      
-  }
-</script>
-</head>
-
-<!--<body class="bg-info" onload="myFunction();">-->
-    <body class="bg-info">
-    <div class="row">
-        <div class="col-md-6 offset-md-3" style="background-color: #fff;border-radius:36px;margin-top: 25px;padding:20px;">
-        <ul>
-            <li><a href="/home"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp;Home</a></li>
-            <li><a href="/department"><i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp;Add Department</a></li>
-            <li><a href="/departmentList"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>&nbsp;View Department</a></li>
-            <li><a href="/employeeList"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>&nbsp;View Employee</a></li>
-        <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Logout</a></li>
-        </ul>
-        <br>
-        <center>
-            {{!-- <h3 id="title">{{viewTitle}}</h3> --}}
-            <h3 style="font-style: italic;">Add Employee</h3>
-            {{#if success }}
-            <div class="alert alert-success text-green" role="alert" style="max-width: 300px;height:auto;font-size:small;">
-                {{success}}
-            </div>
-            {{/if}}
-            {{#if error}}
-            <div class="alert alert-danger text-red" role="alert" style="max-width: 500px;height:auto;font-size:small;">
-                {{error}}
-            </div>
-            {{/if}}
-        </center>
-<form action="/employee" method="POST" autocomplete="off" id="add_emp" >
-    <input type="hidden" name="_id" value="{{employee.emp_id}}">
-    <div class="form-group">
-        <label>Employee Name</label>
-        <input type="text" class="form-control" id="name" name="empName" placeholder="Employee Name" value="{{Data.empName}}">
-        {{#if errors.empName }}
-        <p>*{{ errors.empName.msg }}</p>
+{{> header}}
+<div class="content">
+    <center>
+        {{!-- <h3 id="title">{{viewTitle}}</h3> --}}
+        <h3 style="font-style: italic;">Add Employee</h3>
+        {{#if success }}
+        <div class="alert alert-success text-green" role="alert" style="max-width: 300px;height:50px;font-size:small;font-weight:bold;">
+            {{success}}
+        </div>
         {{/if}}
-    </div>
-    <div class="form-group">
-        <label>Employee Address</label>
-        <input type="text" class="form-control" id="addr" name="address" placeholder="Employee Address"
-            value="{{Data.address}}">
+        {{#if error}}
+        <div class="alert alert-danger text-red" role="alert" style="max-width: 500px;height:auto;font-size:small;font-weight:bold;">
+            {{error}}
+        </div>
+        {{/if}}
+    </center>
+    <center>
+    <form action="/employee" method="POST" autocomplete="off" id="add_emp" style="margin-top: 10px;">
+                <input type="hidden" name="_id" value="{{employee.emp_id}}">
+        {{!-- <div style="float:left;margin-left:40px;"> --}}
+            <input type="text" class="form-control" id="name" name="empName" placeholder="Enter Employee Name"
+                value="{{Data.empName}}">
+            {{#if errors.empName }}
+            <p>*{{ errors.empName.msg }}</p>
+            {{/if}}
+        {{!-- </div> --}}
+        {{!-- <div style="float:left;margin-left:35px;margin-bottom:12px"> --}}
+            <input style="margin-top:10px" type="text" class="form-control" id="addr" name="address" placeholder="Enter Employee Address"
+                value="{{Data.address}}">
             {{#if errors.address }}
             <p>*{{ errors.address.msg }}</p>
             {{/if}}
-    </div>
-    <div class="form-group">
-        <label>Email Address</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" value="{{Data.email}}">
-        {{#if errors.email }}
-        <p>*{{ errors.email.msg }}</p>
-        {{/if}}
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label>Mobile</label>
-            <input type="text" class="form-control" id="mob" name="mobile" placeholder="Mobile" value="{{Data.mobile}}">
+        {{!-- </div> --}}
+        {{!-- <div style="float:left;margin-left:40px"> --}}
+            <input style="margin-top:10px" type="email" class="form-control" id="email" name="email" placeholder="Enter Email Address"
+                value="{{Data.email}}">
+            {{#if errors.email }}
+            <p>*{{ errors.email.msg }}</p>
+            {{/if}}
+        {{!-- </div> --}}
+
+        {{!-- <div style="float:left;margin-left:35px;margin-bottom:12px"> --}}
+            <input style="margin-top:10px" type="text" class="form-control" id="mob" name="mobile" placeholder="Enter Mobile"
+                value="{{Data.mobile}}">
             {{#if errors.mobile }}
             <p>*{{ errors.mobile.msg }}</p>
             {{/if}}
-        </div>
-        <div class="form-group col-md-6">
-            <label>Salary</label>
-            <input type="text" class="form-control" id="sal" name="salary" placeholder="Salary" value="{{Data.salary}}">
+        {{!-- </div><br> --}}
+        {{!-- <div style="float:left;margin-left:40px"> --}}
+            <input style="margin-top:10px;margin-bottom:10px;" type="text" class="form-control" id="sal" name="salary" placeholder="Enter Salary"
+                value="{{Data.salary}}">
             {{#if errors.salary }}
             <p>*{{ errors.salary.msg }}</p>
             {{/if}}
-        </div>
-        <div hidden class="form-group col-md-6" id="dept">
+        {{!-- </div> --}}
+        <div hidden class="form-group " id="dept">
             <label>Department</label>
-            <input type="text" readonly="true" class="form-control" id="deptBox" name="depat" placeholder="Department" value="{{Data.depat}}">
+            <input type="text" readonly="true" class="form-control" id="deptBox" name="depat" placeholder="Department"
+                value="{{Data.depat}}">
         </div>
-        <div class="form-group col-md-6">
-            <label id="Dept">Choose Department</label><br> <select style="font-size:12px;font-weight:bold;" class="DselectBox" name="dept" id="selector" onchange="selectChanger();">
-				{{!-- <option hidden>Choose Department...</option> --}}
+        {{!-- <div style="float:left;margin-left:35px;margin-bottom:45px"> --}}
+            <label style="font-size:small;">Select Department</label>
+            <select style="font-size:10px;font-weight:bold;height:28px" class="DselectBox" name="dept" id="selector"
+                onchange="selectChanger();">
+                {{!-- <option selected="selected">Choose Department...</option> --}}
                 <option hidden="hidden" selected="selected" value={{Data.dept}}>{{Data.depat}}</option>
-                
-        {{#each list}}
-        <option value={{this._id}} style="font-size:12px;font-weight:bold;">{{this.deptName}}</option>
-        {{/each}}
-        </select>
-        {{#if errors.dept }}
-        <p>*{{ errors.dept.msg }}</p>
-        {{/if}}
-        </div>
-    </div>
-    <div class="form-group">
-        <center><button type="submit" class="btn btn-info"><i class="fa fa-database"></i>&nbsp;Submit</button></center>
-    </div>
-    <!--<div class="form-group">
-        <center><button type="submit" class="btn btn-info" id="submit"><i class="fa fa-database"></i>&nbsp;Submit</button>
-                <button type="submit" class="btn btn-info" onclick="submitForm();" id="update"><i style="color:white"class="fa fa-edit"
-                    aria-hidden="true"></i>&nbsp;Update</button></center>
-        {{!-- <a class="btn btn-secondary" href="/employeeList"><i class="fa fa-list-alt"></i> View All</a> --}}
-    </div>-->
-</form><br><center>
-<div class="form-group">
-    <span class="footer">Developed By: Indranil Chatterjee</span>
-</div>
-</center>
-        </div>
-    </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-</body>
 
-</html>
+                {{#each list}}
+                <option value={{this._id}} style="font-size:12px;font-weight:bold;">{{this.deptName}}</option>
+                {{/each}}
+            </select>
+            {{#if errors.dept }}
+            <p>*{{ errors.dept.msg }}</p>
+            {{/if}}
+        {{!-- </div> --}}
+        <center>
+            <div>
+                <button style="margin-top: 10px;" type=" submit" class="btn btn-info"><i class="fa fa-database"></i>&nbsp;Submit</button>
+            </div>
+        </center>
+
+    </form>
+    </center>
+</div>

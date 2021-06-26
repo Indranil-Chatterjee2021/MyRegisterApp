@@ -8,7 +8,12 @@ exports.validateDept = [
     .isInt()
     .isLength({ min: 4 }),
   // Department Name validation check ...
-  check("deptname", "Name should not be empty").trim().notEmpty(),
+  check("deptname")
+    .trim()
+    .notEmpty()
+    .withMessage("Name is required")
+    .matches(/^[a-zA-Z\s]*$/)
+    .withMessage("Only Characters with white space are allowed"),
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

@@ -6,19 +6,14 @@ module.exports = {
     var year = date_ob.getFullYear();
     return date + "/" + month + "/" + year;
   },
-  getDateTime: () => {
-    var dateTime = new Date();
-
-    var date = ("0" + dateTime.getDate()).slice(-2);
-    var month = ("0" + (dateTime.getMonth() + 1)).slice(-2);
-    var year = dateTime.getFullYear();
-
-    var hrs = dateTime.getHours();
-    var mins = dateTime.getMinutes();
-    var scnds = dateTime.getSeconds();
-
-    return (
-      date + "/" + month + "/" + year + " " + hrs + ":" + mins + ":" + scnds
-    );
+  getTime: () => {
+    var times = new Date();
+    var date = ("0" + times.getDate()).slice(-2);
+    var month = ("0" + (times.getMonth() + 1)).slice(-2);
+    var year = times.getFullYear();
+    var Hr = new times.getHours();
+    var Min = ("0" + times.getMinutes()).slice(-2);
+    var Sec = ("0" + times.getSeconds()).slice(-2);
+    return date + "/" + month + "/" + year + " " + Hr + ":" + Min + ":" + Sec;
   },
 };

@@ -9,11 +9,12 @@ const DeptCntrlr = require("../controllers/DeptController");
 const EmpCntrlr = require("../controllers/EmpController");
 
 //Login/Home Page Route....
-router.get("/home", (req, res) => {
-  res.render("home", {
-    viewTitle: "A NodeJs ExpressJs MongoDB CRUD Web Application",
-  });
-});
+// router.get("/home", (req, res) => {
+//   res.render("home", {
+//     viewTitle: "A NodeJs ExpressJs MongoDB CRUD Web Application",
+//   });
+// });
+router.get("/home", login_reg_cntrl.userList);
 
 router.get("/", login_reg_cntrl.getLogin);
 router.post("/login", login_reg_cntrl.logIn);
@@ -41,7 +42,7 @@ router.post("/department/update", DeptCntrlr.update);
 // Employee Routings....
 router.get("/employee", EmpCntrlr.loadEmp);
 router.post("/employee", validateEmp, EmpCntrlr.create);
-router.get("/employeeList", EmpCntrlr.find);
+router.get("/employeeList", EmpCntrlr.empList);
 router.get("/employee/:id", EmpCntrlr.find);
 router.post("/empUpdate", EmpCntrlr.update);
 router.get("/employee/delete/:id", EmpCntrlr.delete);

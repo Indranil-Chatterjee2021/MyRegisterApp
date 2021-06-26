@@ -1,79 +1,48 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>NodeMongoCRUD</title>
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<body class="bg-info">
-    <div class="row">
-        <div class="col-md-6 offset-md-3"
-            style="background-color: #fff;border-radius:36px;margin-top: 25px;padding:20px;">
-            <ul>
-                <li><a href="/home"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp;Home</a></li>
-                <li><a href="/department"><i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp;Add Department</a></li>
-                <li><a href="/employee"><i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp;Add Employee</a></li>
-                <li><a href="/employeeList"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>&nbsp;View Employee</a></li>
-            <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Logout</a></li>
-            </ul>
-            <br>
-            <center>
-            <h3 style="text-align: center;font-style: italic;">Department List</h3>
-            {{#if success }}
-            <div class="alert alert-success text-green" role="alert" style="max-width: 350px;height:auto;font-size:smaller;font-weight:bold;">
-                {{success}}
-            </div>
-            {{/if}}
-            {{#if error}}
-            <div class="alert alert-danger text-red" role="alert" style="max-width: 300px;height:auto;font-size:smaller;font-weight:bold;">
-                 {{error}}
-            </div>
-            {{/if}}
-            </center>
-            <table class="table table-hover table-sm css-serial ">
-                <thead class="thead-dark">
-                    <tr style="text-align: center;font-size:small;">
-                        <th>Sl.No</th>
-                        <th>Code</th>
-                        <th>Name</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each list}}
-                    <tr style="text-align: center;font-size: smaller;">
-                        <td></td>
-                        <td>{{this._id}}</td>
-                        <td>{{this.deptName}}</td>
-                        <td>
-                            <a href="/department/{{this._id}}"
-                                onclick="return confirm('Are you sure to update this record ?');"><i
-                                class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
-                            {{!-- <a href="/employee/delete/{{this._id}}"
-                                onclick="return confirm('Are you sure to delete this record ?');"><i
-                                class="fa fa-trash fa-lg" aria-hidden="true"></i></a> --}}
-                        </td>
-                    </tr>
-                    {{/each}}
-                </tbody>
-            </table>
-            <nav aria-label="Page navigation example" class="pagination">
-                <ul>
-                    {{#paginate current=current pages=pages}}
-                    {{/paginate}}
-                </ul>
-            </nav>
-            <br><br>
-            <center>
-                <div class="form-group">
-                    <span class="footer">Developed By: Indranil Chatterjee</span>
-                </div>
-            </center>
-        </div>
+{{> header}}
+<center>
+    <h3 style="text-align: center;color:white;font-style: italic;">Department List</h3>
+    {{#if success }}
+    <div class="alert alert-success text-green" role="alert"
+        style="max-width: 350px;height:auto;font-size:smaller;font-weight:bold;">
+        {{success}}
     </div>
-
-</body>
-</html>
+    {{/if}}
+    {{#if error}}
+    <div class="alert alert-danger text-red" role="alert"
+        style="max-width: 300px;height:auto;font-size:smaller;font-weight:bold;">
+        {{error}}
+    </div>
+    {{/if}}
+</center><br>
+<table class="table table-hover table-sm css-serial " style="width: 65%">
+    <thead class="thead-dark">
+        <tr style="text-align: center;">
+            <th>#</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each list}}
+        <tr style="text-align: center;font-size: 13px;">
+            <td></td>
+            <td>{{this._id}}</td>
+            <td>{{this.deptName}}</td>
+            <td>
+                <a href="/department/{{this._id}}" onclick="return confirm('Are you sure to update this record ?');"><i
+                        class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                {{!-- <a href="/employee/delete/{{this._id}}"
+                    onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg"
+                        aria-hidden="true"></i></a> --}}
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<nav aria-label="Page navigation example" class="pagination">
+    <ul>
+        {{#paginate current=current pages=pages}}
+        {{/paginate}}
+    </ul>
+</nav>

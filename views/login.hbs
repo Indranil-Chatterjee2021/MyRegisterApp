@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>NodeMongoCRUD</title>
 	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
 	{{!-- <link rel="icon" href="/favicon.ico" type="image/x-icon"> --}}
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
 	</script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/style1.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<script type="text/javascript">
@@ -46,16 +46,21 @@
 		});
 	</script>
 </head>
-<body class="bg-info">
+<body>
+	<div class="text-center">
+		<span style="font-weight: bold;color:white;font-size:20px">A Simple NodeJs ExpressJs MongoDB CRUD Web
+			Application</span><br>
+		<span style="font-weight: bold;color:#FF3131;font-size:large">Developed By : Indranil Chatterjee</span>
+	</div>
 	<center>
-	<div class="col-md-4 col-md-offset-4" style="background-color: #fff;border-radius:36px;margin-top: 100px;padding:20px;">
+	<div class="col-md-4 col-md-offset-4" style="background-color: #fff;border-radius:36px;margin-top: 40px;padding:20px;">
 		<div>
 			<center><h4><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Login</h4>
 			<div class="mssg bg-danger">
 				<span id="check" style="color:orange"></span>
 			</div>
 			</center>
-		</div>
+		</div><br>
 		<div class="form-group">
 			<form id="form" method="post" autocomplete="off">
 				<input style="text-align: center;" type="text" name="email" placeholder="E-mail" required="" class="form-control"><br/>
@@ -68,9 +73,6 @@
 		<div><span>Do you forgot password?</span><a href="/forgetpass">Click here</a><br>
 		    <span>Create a new Account?</span><a href="/register">Register here</a>
 		</div><br>
-		<div class="form-group footer">
-			<span class="footer">Developed By: Indranil Chatterjee</span>
-		</div>
 		</center>
 	</div>
 </center>

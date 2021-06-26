@@ -6,6 +6,7 @@ const { json } = require("body-parser");
 var getdates = getDate();
 
 exports.loadDept = (req, res) => {
+  var usrnme = req.body.username;
   res.render("department", {
     viewTitle: "Add Department",
     success: req.flash("Success"),

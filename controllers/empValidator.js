@@ -3,25 +3,43 @@ const Department = require("../models/department.model");
 
 exports.validateEmp = [
   // Employee Name validation check ...
-  check("empName", "Name should not be empty").trim().notEmpty(),
+  check("empName")
+    .trim()
+    .notEmpty()
+    .withMessage("Name is required")
+    .matches(/^[a-zA-Z\s]*$/)
+    .withMessage("Only Characters with white space are allowed"),
   // Employee Name validation check ...
-  check("address", "Address should not be empty").trim().notEmpty(),
+  check("address")
+    .trim()
+    .notEmpty()
+    .withMessage("Address is required")
+    .matches(/^[a-zA-Z0-9\s,.-]{3,}$/)
+    .withMessage("Please enter valid address"),
   // Email validation check ...
   check("email", "Valid Email address required")
     .notEmpty()
     .normalizeEmail()
     .isEmail(),
   // Mobile No validation check ...
-  check("mobile", "Mobile No should not be empty and must be in 10 digits")
+  check("mobile")
     .trim()
     .notEmpty()
-    .isInt()
-    .isLength({ max: 10 }),
+    .withMessage("Mobile No is required")
+    .matches(
+      /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[6789]\d{9}|(\d[ -]?){10}\d$/
+    )
+    .withMessage("Mobile No must be start with 6,7,8,9 Min 10 digits"),
+
   // Salary validation check ...
-  check("salary", "Salary should not be empty and must be in digits")
+  check("salary")
     .trim()
     .notEmpty()
-    .isInt(),
+    .withMessage("Salary is required")
+    .toInt()
+    .withMessage("Salary must be in digits")
+    .matches(/^[1-9][0-9]*(\.[0-9])?/)
+    .withMessage("Salary should be a positve value"),
   // Department validation check ...
   check("dept", "Department name is required").trim().notEmpty(),
   check("depat", "Department name is required").trim().notEmpty(),
@@ -37,7 +55,7 @@ exports.validateEmp = [
         });
       }
       next();
-    });
+    }).lean();
   },
 ];
 

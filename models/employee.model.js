@@ -1,6 +1,7 @@
 //const mongoose = require("./db");
 const mongoose = require("mongoose");
 const AutoIncrement = require("mongoose-sequence")(mongoose);
+var aggregatePaginate = require('mongoose-aggregate-paginate-v2');
 // Employee Schema
 var employee = new mongoose.Schema(
   {
@@ -35,4 +36,5 @@ var employee = new mongoose.Schema(
 
 //employee.plugin(AutoIncrement, { inc_field: "_id" }, { start_seq: 10001 });
 employee.plugin(AutoIncrement, { start_seq: 10001 });
+employee.plugin(aggregatePaginate);
 module.exports = mongoose.model("Employee", employee);

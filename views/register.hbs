@@ -1,51 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>NodeMongoCRUD</title>
 	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
 	</script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/style1.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script type="text/javascript">
-	$(document).ready(function () {
-
-		$("#form1").submit(function (event) {
-			event.preventDefault();
-
-			$.ajax({
-				type: 'POST',
-				url: '/',
-				data: $('#form1').serialize(),
-				dataType: "json",
-				success: function (response) {
-					//alert("a");
-					//console.log(response.Success);
-					$('#form1')[0].reset();
-
-					document.getElementById("check").innerHTML = response.Success;
-					//ADD THIS CODE
-					setTimeout(function () {
-						document.getElementById("check").innerHTML = "";
-					}, 6000);// 6seconds
-					if (response.Success == "You are registered,You can login now.") {
-						document.getElementById("aa").click();
-					};
-				},
-				error: function () {
-				}
-			})
-		});
-	});
-</script>
+	<script src="/JS/myScripts.js"></script>
+    <script type="text/javascript">
+	    $(document).ready(function () {
+		    $("#form1").submit(function (event) {
+			  event.preventDefault();
+              validateRegForm();
+		    });
+	    });
+    </script>
 </head>
-<body class="bg-info">
+<body>
+	<div class="text-center">
+		<span style="font-weight: bold;color:white;font-size:20px">A Simple NodeJs ExpressJs MongoDB CRUD Web
+			Application</span><br>
+		<span style="font-weight: bold;color:#FF3131;font-size:large">Developed By : Indranil Chatterjee</span>
+	</div>
 <center>
-	<div class="col-md-4 col-md-offset-4" style="background-color: #fff;border-radius:36px;margin-top: 80px;padding:20px;">
+	<div class="col-md-4 col-md-offset-4" style="background-color: #fff;border-radius:36px;margin-top: 30px;padding:20px;">
 		<div>
 			<center>
 				<h4><i class="fa fa-registered" aria-hidden="true"></i>&nbsp;Register Now</h4>
@@ -55,19 +38,19 @@
 					</div>
 				</div>
 			</center>
-		</div>
+		</div><br>
 			<form id="form1" method="post" class="regForm" autocomplete="off">
 			<div class="form-group">
-				<input type="email" name="email" required="" placeholder="E-mail" class="form-control" >
+				<input type="text" id="eml" name="email" placeholder="E-mail" class="form-control" >
 				</div>
 			<div class="form-group">
-				<input type="text" name="username" required="" placeholder="Username"  class="form-control" >
+				<input type="text" id="usrnm"name="username" placeholder="Username"  class="form-control" >
 				</div>	
 		    <div class="form-group">
-				<input type="password" name="password" required="" placeholder="Password" class="form-control" >
+				<input type="password" id="pwd" name="password" placeholder="Password" class="form-control" >
 				</div>	
 			<div class="form-group">
-				<input type="password" name="passwordConf" required="" placeholder="Confirm Password" class="form-control" >
+				<input type="password" id="cnpwd" name="passwordConf" placeholder="Confirm Password" class="form-control" >
 				</div>	
 			<div class="form-group">
 				<center><input type="submit" value="Register" class="btn btn-success"></center>
@@ -79,9 +62,6 @@
 		</div>
 		<a href="/" id="aa"></a>
 		<br>
-		<div class="form-group">
-			<span class="footer">Developed By: Indranil Chatterjee</span>
-		</div>
 		</center>
 	</div>
 </center>

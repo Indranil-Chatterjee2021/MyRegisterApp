@@ -146,6 +146,62 @@ exports.creates = (req, res) => {
   }
 };
 
+exports.empList = (req, res) => {
+  const postPerPage = 5;
+  const page = req.query.page || 1;
+  var limit = parseInt(postPerPage);
+  const options = {
+    page: page,
+    limit: limit,
+  };
+  var empAggregate = Employee.aggregate([
+    // Join with departments collection
+    {
+      $lookup: {
+        from: "departments",
+        localField: "dept_id",
+        foreignField: "_id",
+        as: "emp_info",
+      },
+    },
+    { $unwind: "$emp_info" },
+
+    // Join with empdetails collection
+    {
+      $lookup: {
+        from: "empdetails",
+        localField: "_id",
+        foreignField: "emp_id",
+        as: "emp_role",
+      },
+    },
+    { $unwind: "$emp_role" },
+    // define which fields are you want to fetch
+    {
+      $project: {
+        _id: 1,
+        empName: 1,
+        salary: 1,
+        email: 1,
+        //emp_id: "$emp_role.emp_id",
+        department: "$emp_info.deptName",
+        address: "$emp_role.address",
+        mobile: "$emp_role.mobile",
+      },
+    },
+  ]);
+  Employee.aggregatePaginate(empAggregate, options).then(function (results) {
+    res.render("employeeList", {
+      success: req.flash("empUpdated"),
+      empDel: req.flash("empDeleted"),
+      error: req.flash("empFailed"),
+      current: results.page,
+      pages: results.totalPages,
+      list: results.docs,
+    });
+  });
+};
+
 exports.find = (req, res) => {
   if (req.params.id) {
     const id = req.params.id;
@@ -201,52 +257,53 @@ exports.find = (req, res) => {
         console.log(aggregate);
       }); // end of empDetail Aggregation Method...
     }).lean(); // end of Department Model...
-  } else {
-    Employee.aggregate([
-      // Join with departments collection
-      {
-        $lookup: {
-          from: "departments",
-          localField: "dept_id",
-          foreignField: "_id",
-          as: "emp_info",
-        },
-      },
-      { $unwind: "$emp_info" },
+  }
+  // else {
+  //   Employee.aggregate([
+  //     // Join with departments collection
+  //     {
+  //       $lookup: {
+  //         from: "departments",
+  //         localField: "dept_id",
+  //         foreignField: "_id",
+  //         as: "emp_info",
+  //       },
+  //     },
+  //     { $unwind: "$emp_info" },
 
-      // Join with empdetails collection
-      {
-        $lookup: {
-          from: "empdetails",
-          localField: "_id",
-          foreignField: "emp_id",
-          as: "emp_role",
-        },
-      },
-      { $unwind: "$emp_role" },
-      // define which fields are you want to fetch
-      {
-        $project: {
-          _id: 1,
-          empName: 1,
-          salary: 1,
-          email: 1,
-          //emp_id: "$emp_role.emp_id",
-          department: "$emp_info.deptName",
-          address: "$emp_role.address",
-          mobile: "$emp_role.mobile",
-        },
-      },
-    ]).exec((err, aggregate) => {
-      res.render("employeeList", {
-        success: req.flash("empUpdated"),
-        empDel: req.flash("empDeleted"),
-        error: req.flash("empFailed"),
-        list: aggregate,
-      });
-      console.log(aggregate);
-    });
-  } // end of if-else statement..
+  //     // Join with empdetails collection
+  //     {
+  //       $lookup: {
+  //         from: "empdetails",
+  //         localField: "_id",
+  //         foreignField: "emp_id",
+  //         as: "emp_role",
+  //       },
+  //     },
+  //     { $unwind: "$emp_role" },
+  //     // define which fields are you want to fetch
+  //     {
+  //       $project: {
+  //         _id: 1,
+  //         empName: 1,
+  //         salary: 1,
+  //         email: 1,
+  //         //emp_id: "$emp_role.emp_id",
+  //         department: "$emp_info.deptName",
+  //         address: "$emp_role.address",
+  //         mobile: "$emp_role.mobile",
+  //       },
+  //     },
+  //   ]).exec((err, aggregate) => {
+  //     res.render("employeeList", {
+  //       success: req.flash("empUpdated"),
+  //       empDel: req.flash("empDeleted"),
+  //       error: req.flash("empFailed"),
+  //       list: aggregate,
+  //     });
+  //     console.log(aggregate);
+  //   });
+  // } // end of if-else statement..
 };
 
 exports.update = async (req, res) => {

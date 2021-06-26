@@ -1,33 +1,44 @@
-<!DOCTYPE html>
-
-<html>
-
-<head>
-    <title>NodeMongoCRUD</title>
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body class="bg-info">
-    <div class="row">
-        <div class="col-md-6 offset-md-3" style="background-color: #fff;border-radius:36px;margin-top: 100px;padding:20px;">
-            <h4 style="text-align: center;">{{viewTitle}}</h4>
-            <br><br>
-            <center>
-          <div class="form-group">
-            <a class="btn btn-secondary" href="/department"><i class="fa fa-list-alt"></i> Department</a>
-            <a class="btn btn-secondary" href="/employee"><i class="fa fa-list-alt"></i> Employee</a> 
-            <a class="btn btn-secondary" href="/userList"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i> User Log</a>
-            <a class="btn btn-secondary" href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
-          </div>
-          <br><br>
-        <div class="form-group">
-            <span class="footer">Developed By: Indranil Chatterjee</span>
-        </div>
-            </center>
-        </div>
-    </div>
-</body>
-</html>
+<!-- include header -->
+{{> header}}
+<!-- /include header -->
+<center>
+    <h3 style="text-align: center;color:white;font-style: italic;">User Log</h3>
+</center><br>
+<table class="table table-hover table-sm css-serial my-3" style="width: 80%">
+    <thead class="thead-dark">
+        <tr style="text-align: center;font-size:smaller;">
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Host Name</th>
+            <th>IP Address</th>
+            <th>LogIn At</th>
+            <th>LogOut At</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each list}}
+        <tr style="text-align: center;font-size:10px;font-weight:bold;" class="align-middle">
+            <td></td>
+            <td>{{this.username}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.host}}</td>
+            <td>{{this.ipAddr}}</td>
+            <td>{{this.loginAt}}</td>
+            <td>{{this.logoutAt}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<nav aria-label="Page navigation example" class="pagination">
+    <ul>
+        {{#paginate current=current pages=pages}}
+        {{/paginate}}
+    </ul>
+</nav>
+{{!-- </div> --}}
+<!-- include footer -->
+{{> footer}}
+<!-- /include footer -->
+<!--</body>
+</html>-->
