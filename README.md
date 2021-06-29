@@ -20,7 +20,7 @@
 
 ### Deployment At
 
-This Project is **[Live](https://http://indra-nodejs-mongodb-crud-app.herokuapp.com//)** on: 🌍 **https://http://indra-nodejs-mongodb-crud-app.herokuapp.com//**
+This Project is **[Live](https://indra-nodejs-mongodb-crud-app.herokuapp.com//)** on: 🌍 **https://indra-nodejs-mongodb-crud-app.herokuapp.com//**
 
 ### DataBase:
 
