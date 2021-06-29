@@ -7,7 +7,7 @@
 
 1.  CRUD ( Create, Read, Update and Delete ) from/in MongoDB collections.
 2.  Data store in MongoDB Cloud Atlas.
-3.  ACID properties used for Transacions management in MongoDB.
+3.  ACID properties used for Transactions management in MongoDB.
 4.  JavaScripts form validations used for Client/Server side to validate inputed data.
 5.  Implemented both options of ObjectId (\_id) creation by manually entering the value as well as auto-incrementing  
     the value numerically.
