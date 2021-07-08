@@ -17,8 +17,7 @@ exports.loadDept = (req, res) => {
 exports.deptList = (req, res) => {
   const postPerPage = 5;
   const page = req.query.page || 1;
-  var deptData = Department.find({ deptName });
-  console.log(deptData);
+
   Department.find({})
     .lean()
     .skip(postPerPage * page - postPerPage)
